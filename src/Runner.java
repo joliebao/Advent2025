@@ -13,7 +13,7 @@ public class Runner {
         Day1 d = new Day1(lines);
 
         System.out.println("Part one answer: " + d.atZero());
-//        System.out.println("Part two answer: " + partTwoAnswer);
+        System.out.println("Part two answer: " + d.getPassesZero());
     }
 
     public static ArrayList<String> getFileData(String fileName) {
