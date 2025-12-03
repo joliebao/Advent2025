@@ -12,7 +12,7 @@ public class Runner {
         ArrayList<String> lines = getFileData("src/Input");
         Day1 d = new Day1(lines);
 
-        System.out.println("Part one answer: " + d.atZero());
+        //System.out.println("Part one answer: " + d.atZero());
         System.out.println("Part two answer: " + d.getPassesZero());
     }
 

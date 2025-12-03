@@ -12,46 +12,40 @@ public class Day1 {
     }
 
     // part 1: find amount of times it is rotated at 0
-    public int rotate(String rotation){
+    public void rotate(String rotation){
         String direction = rotation.substring(0,1);
         int turnValue = Integer.parseInt(rotation.substring(1));
-        while (turnValue > 99){
-            turnValue -= 100;
-            passesZero++;
-        }
+
         if (direction.equals("L")){
             dial -= turnValue;
-            if (dial < 0){
-                dial = 100 + dial; // because it is negative add dial amount
-                passesZero++;
-            } else if (dial > 99){
-                dial = dial - 100; // reset back to 0 + dial overflow
+            while (dial < 0){
+                dial += 100;
                 passesZero++;
             }
         } else {
             dial += turnValue;
-            if (dial > 99){
-                dial = dial - 100;
-                passesZero++;
-            } else if (dial < 0){
-                dial = 100 + dial;
+            while (dial > 99){
+                dial -= 100;
                 passesZero++;
             }
         }
-        return dial;
     }
 
     public int atZero(){
-        for (int i = 0; i < input.size(); i++){
-            System.out.println(dial);
-            if (rotate(input.get(i)) == 0){
-                zeroes++;
-            }
+        for (String r : input){
+            rotate(r);
+            if (dial == 0) zeroes++;
         }
-        return zeroes; // change
+        return zeroes;
     }
 
+    // Part 2
     public int getPassesZero(){
-        return zeroes + passesZero; // too high
+        for (String r : input){
+            rotate(r);
+            System.out.println(passesZero);
+            if (dial == 0) passesZero++;
+        }
+        return passesZero;
     }
 }
