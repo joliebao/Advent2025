@@ -10,7 +10,6 @@ public class Runner {
         //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
         // to see how IntelliJ IDEA suggests fixing it.
         ArrayList<String> lines = getFileData("src/Input");
-        System.out.println(lines);
         Day2 d = new Day2(lines);
 
         System.out.println("Part one answer: " + d.getSum());

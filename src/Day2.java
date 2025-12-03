@@ -2,11 +2,10 @@ import java.util.ArrayList;
 
 public class Day2 {
     private ArrayList<String> input;
-    private int sum;
+    private long sum = 0;
 
     public Day2(ArrayList<String> list){
         input = list;
-        sum = 0;
     }
 
     // part 1
@@ -18,26 +17,32 @@ public class Day2 {
             String last = range.substring(range.indexOf("-") + 1);
 
             // if even (because they need to repeat patterns)
-            if (first.length() % 2 == 0){
-                int num1 = Integer.parseInt(first);
-                int num2 = Integer.parseInt(last);
-                if (first.substring(0,first.length()/2).equals(first.substring(first.length()/2)+1)){
-                    sum += num1;
-                }
-                if (last.substring(0,last.length()/2).equals(last.substring(last.length()/2)+1)){
-                    sum += num2;
-                }
-                // finish this part
-                while (num1 < num2){
-                    num1 ++;
+            if (first.length() % 2 == 0 || last.length() % 2 == 0){
+                long num1 = Long.parseLong(first);
+                long num2 = Long.parseLong(last);
 
+                if (num2 > num1) {
+                    while (num1 <= num2) {
+                        String middle = String.valueOf(num1);
+                        if (middle.substring(0, middle.length() / 2).equals(middle.substring(middle.length() / 2))) {
+                            sum += num1;;
+                        }
+                        num1++;
+                    }
+                } else if (num1 > num2){
+                    while (num1 >= num2) {
+                        String middle = String.valueOf(num1);
+                        if (middle.substring(0, middle.length() / 2).equals(middle.substring(middle.length() / 2))) {
+                            sum += num1;
+                        }
+                        num1--;
+                    }
                 }
             }
-            System.out.println(first + " " + last);
         }
     }
 
-    public int getSum(){
+    public long getSum(){
         for (String line : input){
             findInvalid(line);
         }
