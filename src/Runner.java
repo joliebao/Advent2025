@@ -12,8 +12,8 @@ public class Runner {
         ArrayList<String> lines = getFileData("src/Input");
         Day2 d = new Day2(lines);
 
-        System.out.println("Part one answer: " + d.getSum());
-        System.out.println("Part two answer: " );
+//        System.out.println("Part one answer: " + d.getSum());
+        System.out.println("Part two answer: " + d.getSum());
     }
 
     public static ArrayList<String> getFileData(String fileName) {

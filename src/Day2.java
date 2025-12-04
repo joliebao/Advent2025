@@ -23,8 +23,9 @@ public class Day2 {
 
                 if (num2 > num1) {
                     while (num1 <= num2) {
-                        if (repeatedValue(num1)){
+                        if (repeatedValue(num1)){;
                             sum += num1;
+                            System.out.println("SUM = " + sum + ": " + num1);
                         }
                         num1++;
                     }
@@ -32,6 +33,7 @@ public class Day2 {
                     while (num1 >= num2) {
                         if (repeatedValue(num1)){
                             sum += num1;
+                            System.out.println("SUM = " + sum + ": " + num1);
                         }
                         num1--;
                     }
@@ -65,18 +67,18 @@ public class Day2 {
     }
 
     private boolean repeatedValue(long numberInt){
+        System.out.println(numberInt);
         String num = String.valueOf(numberInt);
-        String repVal = "";
+        String repVal = num.substring(0,1);
         int index = 1;
-        while (repVal.length() != num.length()/2) {
-            repVal = num.substring(0, index);
-            for (int i = 0; i < num.length(); i+=repVal.length()) {
-                if (num.substring(i, index).equals(repVal)){
-                    return true;
-                }
-            }
+
+        while (index < num.length()/2) { // while less than half way repeating
+            System.out.println(num.substring(index,index+1));
+            repVal += num.substring(index,index+1); // add another letter to the repeating value
+            num = num.replaceAll(repVal, "");
             index++;
         }
+        if (num.isEmpty()) return true;
         return false;
     }
 
