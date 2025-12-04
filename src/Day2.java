@@ -23,23 +23,61 @@ public class Day2 {
 
                 if (num2 > num1) {
                     while (num1 <= num2) {
-                        String middle = String.valueOf(num1);
-                        if (middle.substring(0, middle.length() / 2).equals(middle.substring(middle.length() / 2))) {
-                            sum += num1;;
+                        if (repeatedValue(num1)){
+                            sum += num1;
                         }
                         num1++;
                     }
                 } else if (num1 > num2){
                     while (num1 >= num2) {
-                        String middle = String.valueOf(num1);
-                        if (middle.substring(0, middle.length() / 2).equals(middle.substring(middle.length() / 2))) {
+                        if (repeatedValue(num1)){
                             sum += num1;
                         }
                         num1--;
                     }
                 }
             }
+
+//            // if even (because they need to repeat patterns)
+//            if (first.length() % 2 == 0 || last.length() % 2 == 0){
+//                long num1 = Long.parseLong(first);
+//                long num2 = Long.parseLong(last);
+//
+//                if (num2 > num1) {
+//                    while (num1 <= num2) {
+//                        String middle = String.valueOf(num1);
+//                        if (middle.substring(0, middle.length() / 2).equals(middle.substring(middle.length() / 2))) {
+//                            sum += num1;;
+//                        }
+//                        num1++;
+//                    }
+//                } else if (num1 > num2){
+//                    while (num1 >= num2) {
+//                        String middle = String.valueOf(num1);
+//                        if (middle.substring(0, middle.length() / 2).equals(middle.substring(middle.length() / 2))) {
+//                            sum += num1;
+//                        }
+//                        num1--;
+//                    }
+//                }
+//            }
         }
+    }
+
+    private boolean repeatedValue(long numberInt){
+        String num = String.valueOf(numberInt);
+        String repVal = "";
+        int index = 1;
+        while (repVal.length() != num.length()/2) {
+            repVal = num.substring(0, index);
+            for (int i = 0; i < num.length(); i+=repVal.length()) {
+                if (num.substring(i, index).equals(repVal)){
+                    return true;
+                }
+            }
+            index++;
+        }
+        return false;
     }
 
     public long getSum(){
