@@ -48,7 +48,7 @@ public class Day3 {
 
     // part 2
     private long getLargest12(String line){
-        long num = 0;
+        String num = "";
         String[] list = line.split("");
         ArrayList<Integer> numerical = new ArrayList<Integer>();
 
@@ -56,27 +56,29 @@ public class Day3 {
             numerical.add(Integer.parseInt(number));
         }
 
-        int max = Collections.max(numerical);
-        int position1 = numerical.indexOf(max);
-
-        if (numerical.size() - position1 > 12){ // if there are more than 12 characters left after the max position
-            for (int i = 0; i <= position1; i++){ // shorten list to last values
-                numerical.remove(i);
+        int max = -1;
+        int index = -1;
+        for (int i = 0; i < numerical.size() - 11; i++) { // get first digit (max that still leaves 11 digits)
+            if (numerical.get(i) > max){
+                max = numerical.get(i);
+                index = i;
             }
-
-            int index = numerical.indexOf(max);
-
-            String strNum = max+line.substring(index, index+11);
-            num = Long.parseLong(strNum);
-            System.out.println(num);
-        } else if (numerical.size() - position1 - 1 == 12){ // perfectly 12 strings
-            num = Long.parseLong(line.substring(position1));
-            System.out.println(num);
-        } else { // less than 12 strings
-
         }
+        num += max;
 
-        return num;
+        for (int n = 0; n < 11; n++) { // running for 12 digits
+            max = -1;
+            for (int i = index+1; i <= numerical.size() - 11 + n; i++) {
+                if (numerical.get(i) > max){
+                    max = numerical.get(i);
+                    index = i;
+                }
+            }
+            num += max;
+        }
+        System.out.println(num);
+
+        return Long.parseLong(num);
     }
 
     public long getSum12(){
