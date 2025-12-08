@@ -21,14 +21,28 @@ public class Day4 {
         return trash;
     }
 
+    private boolean checkRolls(int r, int c){
+        int paper = 0;
+        if (r > 0){
+            if (diagram[r-1][c].equals("@")){
+                paper++;
+            }
+        }
+        if (c > 0){
+
+        }
+
+        return (paper < 4);
+    }
+
     public int getRolls(){
         diagram = twoDMaker();
         // trash count < 4
         // do exceptions for the ends
         for (int i = 0; i < diagram.length; i++){
             for (int j = 0; j < diagram[0].length; j++){
-                if (i == 0 || i == diagram.length-1){
-
+                if (diagram[i][j].equals("@")){
+                    checkRolls(i, j);
                 }
             }
         }
