@@ -13,7 +13,7 @@ public class Runner {
         Day4 d = new Day4(lines);
 
         System.out.println("Part one answer: " + d.getRolls() );
-        System.out.println("Part two answer: " );
+        System.out.println("Part two answer: " + d.reroll() );
     }
 
     public static ArrayList<String> getFileData(String fileName) {
