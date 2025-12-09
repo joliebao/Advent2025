@@ -75,9 +75,8 @@ public class Day4 {
     }
 
     // part 2
-    // 8442
     public int reroll(){
-        for (int i = 0; i < 250; i++){
+        for (int i = 0; i < 250; i++){ //change i max until it the rolls removed is the same
             getRolls();
         }
 
