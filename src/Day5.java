@@ -5,8 +5,6 @@ public class Day5 {
     private ArrayList<String> ranges = new ArrayList<String>();
     private long lower;
     private long higher;
-    private boolean fresh;
-    private int counter;
     private int count;
 
     public Day5(ArrayList<String> list){
@@ -20,35 +18,25 @@ public class Day5 {
         }
     }
 
-    public boolean getFresh(){
+    public boolean isFresh(long num){
         for (int i = 0; i < ranges.size(); i++){
             String range = ranges.get(i);
             lower = Long.parseLong(range.substring(0, range.indexOf("-")));
             higher = Long.parseLong(range.substring(range.indexOf("-") + 1));
-            long num = Long.parseLong(input.get(counter));
-            if (num > lower && num < higher){
-                   input.remove(counter);
-                   counter--;
+            if (num <= higher && num >= lower){
+                return true;
             }
-            counter++;
         }
-        return fresh; // placeholder
+        return false;
     }
 
     public int getSum(){
-        counter = 0;
-        while (!fresh || counter < input.size()){
-            if (getFresh()){
+        for (String id: input){
+            long num = Long.parseLong(id);
+            if (isFresh(num)){
                 count++;
             }
-            counter ++;
         }
         return count;
     }
-
-    // first separate lines with dashes and just numbers
-    // iterate through the dashed values each time
-    // if number is between the bounds, add to count
-    // return count
-    // end loop at first case of pass (to prevent overlap)
 }
