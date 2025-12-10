@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 public class Day5 {
     private ArrayList<String> input = new ArrayList<String>();
@@ -18,9 +20,9 @@ public class Day5 {
         }
     }
 
+    // part 1
     public boolean isFresh(long num){
-        for (int i = 0; i < ranges.size(); i++){
-            String range = ranges.get(i);
+        for (String range: ranges){
             lower = Long.parseLong(range.substring(0, range.indexOf("-")));
             higher = Long.parseLong(range.substring(range.indexOf("-") + 1));
             if (num <= higher && num >= lower){
@@ -38,5 +40,47 @@ public class Day5 {
             }
         }
         return count;
+    }
+
+    // part 2
+    private void sortRange(){
+        for (int i = 1; i < ranges.size(); i++){
+            // sorts by length
+            String r2 = ranges.get(i);
+            String r1 = ranges.get(i-1);
+            long l2 = Long.parseLong(r2.substring(0, r2.indexOf("-")));
+            long l1 = Long.parseLong(r1.substring(0, r1.indexOf("-")));
+            while (l2 < l1 && i >= 1){
+                ranges.add(i-1, ranges.get(i));
+                ranges.remove(i+1);
+                i--;
+            }
+        }
+    }
+
+
+    public long getMaxFresh(){
+        sortRange();
+        System.out.println(ranges);
+        long total = 0;
+        long lastUpper;
+        for (int i = 0; i < ranges.size(); i++){
+            if (i == 0){
+                lastUpper = 0;
+            } else {
+                String lastRange = ranges.get(i-1);
+                lastUpper = Long.parseLong(lastRange.substring(lastRange.indexOf("-") + 1));
+            }
+            String range = ranges.get(i);
+            lower = Long.parseLong(range.substring(0, range.indexOf("-")));
+            if (lower < lastUpper){
+                lower = lastUpper + 1;
+            }
+            higher = Long.parseLong(range.substring(range.indexOf("-") + 1));
+            System.out.println(higher - lower);
+            total += (higher - lower) + 1;
+            System.out.println(total);
+        }
+        return total;
     }
 }

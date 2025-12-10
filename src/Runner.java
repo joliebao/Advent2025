@@ -13,7 +13,7 @@ public class Runner {
         Day5 d = new Day5(lines);
 
         System.out.println("Part one answer: "  + d.getSum());
-        System.out.println("Part two answer: "  );
+        System.out.println("Part two answer: " + d.getMaxFresh());
     }
 
     public static ArrayList<String> getFileData(String fileName) {
