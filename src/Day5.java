@@ -43,7 +43,7 @@ public class Day5 {
     // part 2
     private ArrayList<Long[]> makeList() {
         ArrayList<Long[]> l = new ArrayList<Long[]>();
-        for (int i = 1; i < ranges.size(); i++) {
+        for (int i = 0; i < ranges.size(); i++) {
             String r = ranges.get(i);
             long lower = Long.parseLong(r.substring(0, r.indexOf("-")));
             long upper = Long.parseLong(r.substring(r.indexOf("-")+1));
@@ -56,26 +56,20 @@ public class Day5 {
     public long getMaxFresh() {
         ArrayList<Long[]> fList = makeList();
         fList.sort(Comparator.comparing(list -> list[0]));
-        for (Long[] list: fList){
-            System.out.println(Arrays.toString(list));
-        }
         long total = 0;
-        long lastUpper;
-        for (int i = 0; i < ranges.size(); i++) {
-            if (i == 0) {
-                lastUpper = 0;
-            } else {
-                String lastRange = ranges.get(i - 1);
-                lastUpper = Long.parseLong(lastRange.substring(lastRange.indexOf("-") + 1));
-            }
-            String range = ranges.get(i);
-            lower = Long.parseLong(range.substring(0, range.indexOf("-")));
+        long lastUpper = 0;
+        for (int i = 0; i < fList.size(); i++) {
+            Long[] range = fList.get(i);
+            System.out.println(Arrays.toString(range));
+            lower = range[0];
             if (lower < lastUpper) {
                 lower = lastUpper + 1;
             }
-            higher = Long.parseLong(range.substring(range.indexOf("-") + 1));
+            higher = range[1];
             total += (higher - lower) + 1;
+            lastUpper = range[1];
         }
+        //335982173536796 is too low
         return total;
     }
 }
