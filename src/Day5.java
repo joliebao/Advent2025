@@ -60,16 +60,16 @@ public class Day5 {
         long lastUpper = 0;
         for (int i = 0; i < fList.size(); i++) {
             Long[] range = fList.get(i);
-            System.out.println(Arrays.toString(range));
-            lower = range[0];
+            lower = range[0] - 1;
             if (lower < lastUpper) {
-                lower = lastUpper + 1;
+                lower = lastUpper;
             }
             higher = range[1];
-            total += (higher - lower) + 1;
-            lastUpper = range[1];
+            if (higher > lastUpper) {
+                total += (higher - lower);
+                lastUpper = range[1];
+            }
         }
-        //335982173536796 is too low
         return total;
     }
 }
