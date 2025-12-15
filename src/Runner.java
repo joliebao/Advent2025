@@ -13,7 +13,7 @@ public class Runner {
         Day6 d = new Day6(lines);
 
         System.out.println("Part one answer: "  + d.doMath());
-        System.out.println("Part two answer: ");
+        System.out.println("Part two answer: " + d.doColMath());
     }
 
     public static ArrayList<String> getFileData(String fileName) {
