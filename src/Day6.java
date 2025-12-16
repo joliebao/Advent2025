@@ -15,13 +15,14 @@ public class Day6 {
 
     // part 1
     private void lineMath(String line){
+        // separating numbers
         ArrayList<String> numbers = new ArrayList<>(Arrays.asList(line.split(" ")));
         for (int i = 0; i < numbers.size(); i++){
-            if (numbers.get(i).isBlank()) {
+            if (numbers.get(i).isBlank()) { // removing empty indexes bc it's split by one space
                 numbers.remove(i);
                 i--;
             } else {
-                String num = numbers.get(i);
+                String num = numbers.get(i); // trim spaces so that parsing is possible
                 numbers.set(i, num.trim());
             }
         }
@@ -66,22 +67,56 @@ public class Day6 {
     }
 
     //part 2
-    private void addNum(int i){
-        // get numbers by iterating through the horizontal values of each row
-        // if all four are 0; skip
-        // if one is " ", replace with a 0
-        // add as a string to a list
+    private String addNum(int i){
         String num = "";
         num += input.get(0).substring(i,i+1);
         num += input.get(1).substring(i,i+1);
         num += input.get(2).substring(i,i+1);
-        num += input.get(3).substring(i,i+1);
-
+//        num += input.get(3).substring(i,i+1);
+        num = num.trim();
+        return num;
     }
 
     public long doColMath(){
-        for (int i = 0; i < input.getFirst().length() - 1; i++){
-            addNum(i);
+        ArrayList<String> numbers = new ArrayList<String>();
+        for (int i = 0; i < input.getFirst().length(); i++){
+            numbers.add(addNum(i));
+        }
+
+        for (int i = 0; i < numbers.size(); i++){
+            if (numbers.get(i).isBlank()) { // removing empty indexes bc it's split by one space
+                numbers.remove(i);
+                i--;
+            }
+        }
+
+        System.out.println(numbers);
+
+        // fix this part up
+        for (String op: operations){
+            if (op.equals("*")){
+                int product = 1;
+                for (int i = 0; i < 3; i++){
+                    if (i < numbers.size()) {
+                        product *= Integer.parseInt(numbers.get(i));
+                        numbers.removeFirst();
+                        i--;
+                    }
+                }
+                System.out.println(product);
+                ans2 += product;
+            } else {
+                int sum = 0;
+                for (int i = 0; i < 3; i++){
+                    if (i < numbers.size()) {
+                        sum += Integer.parseInt(numbers.get(i));
+                        numbers.removeFirst();
+                        i--;
+                    }
+                }
+                System.out.println(sum);
+                ans2 += sum;
+            }
         }
 
         return ans2;
