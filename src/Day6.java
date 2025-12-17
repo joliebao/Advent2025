@@ -72,7 +72,7 @@ public class Day6 {
         num += input.get(0).substring(i,i+1);
         num += input.get(1).substring(i,i+1);
         num += input.get(2).substring(i,i+1);
-//        num += input.get(3).substring(i,i+1);
+        num += input.get(3).substring(i,i+1);
         num = num.trim();
         return num;
     }
@@ -82,43 +82,26 @@ public class Day6 {
         for (int i = 0; i < input.getFirst().length(); i++){
             numbers.add(addNum(i));
         }
+        numbers.add("");
 
-        for (int i = 0; i < numbers.size(); i++){
-            if (numbers.get(i).isBlank()) { // removing empty indexes bc it's split by one space
-                numbers.remove(i);
-                i--;
-            }
-        }
-
-        System.out.println(numbers);
-
-        // fix this part up
         for (String op: operations){
             if (op.equals("*")){
-                int product = 1;
-                for (int i = 0; i < 3; i++){
-                    if (i < numbers.size()) {
-                        product *= Integer.parseInt(numbers.get(i));
-                        numbers.removeFirst();
-                        i--;
-                    }
+                long product = 1L;
+                for (int i = 0; i < numbers.indexOf(""); i++){
+                    product *= Integer.parseInt(numbers.removeFirst());
+                    i--;
                 }
-                System.out.println(product);
                 ans2 += product;
             } else {
                 int sum = 0;
-                for (int i = 0; i < 3; i++){
-                    if (i < numbers.size()) {
-                        sum += Integer.parseInt(numbers.get(i));
-                        numbers.removeFirst();
-                        i--;
-                    }
+                for (int i = 0; i < numbers.indexOf(""); i++){
+                    sum += Integer.parseInt(numbers.removeFirst());
+                    i--;
                 }
-                System.out.println(sum);
                 ans2 += sum;
             }
+            numbers.removeFirst();
         }
-
         return ans2;
     }
 }
